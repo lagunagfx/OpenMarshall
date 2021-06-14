@@ -3,15 +3,11 @@
   Marshall Pedalboard for Arduino
   CC BY-SA Jorge Barrientos, 2011
 
-  Revision:
-  
-  2011-08-04 :
-  
-  · Foot Switchs 3 and 4 seems to need debouncing
-  
-  2011-08-03 : 
-  
-  · First sketch using a protoboard.
+  ChangeLog:
+
+  2021-06-14 | Rescued from the vault! Migrated to PlatformIO's standard C++
+  2011-08-04 | Foot Switchs 3 and 4 seems to need debouncing  
+  2011-08-03 | First sketch using a protoboard.
   
 */
 
@@ -51,7 +47,6 @@ char midiNoteConfig[4][4] = {
 };
 
 int buttonPin[HowManyButtons] = {button1Pin,button2Pin,button3Pin,button4Pin,button5Pin};
-
 int ledPin[HowManyLeds] = {led1Pin,led2Pin,led3Pin,led4Pin};
 
 // array [1][n] are LAST STORED values, array [0][n] are CURRENT values
@@ -226,6 +221,3 @@ void loop() {  // MAIN LOOP START
   }
   
 }  // MAIN LOOP ENDS
-
-// : functions description
-

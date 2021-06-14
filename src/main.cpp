@@ -1,7 +1,15 @@
 /*
 
-  Marshall Pedalboard for Arduino
-  CC BY-SA Jorge Barrientos, 2011
+  OpenMarshall
+
+  An Arduino-based MIDI footswitch using Marshall MG series hardware
+  written by Jorge Barrientos AKA LagunaGFX
+
+  * This version uses the hardware housing and pushbuttons.
+
+  ToDo:
+
+  Use the original board, if possible, reprogramming the original ATTiny processor.
 
   ChangeLog:
 
@@ -11,10 +19,12 @@
   
 */
 
-  // #defines pinout configuration. 
-  // "button 5" acts as a SHIFT/FUNCTION key to create keystrokes
-
 #include <Arduino.h>
+
+/*
+  Pinout configuration. 
+ "button 5" acts as a SHIFT/FUNCTION key to create keystrokes
+*/
 
 #define HowManyButtons 5
 #define HowManyLeds 4
@@ -30,7 +40,7 @@
 #define led3Pin 5
 #define led4Pin 4
 
-// : MIDI implementation
+// MIDI implementation
 
 #define MIDI_COMMAND_NOTEOFF   0x80
 #define MIDI_COMMAND_NOTEON    0x90
@@ -105,7 +115,7 @@ void setup() {
 
   // Set MIDI baud rate:
   //Serial.begin(31250);
-  Serial.begin(115200);
+  Serial.begin(115200); // highiest baud rate suitable for serial over USB
 
   // Startup LED test sequence
   // just for debugging and visual pimpin'
@@ -133,8 +143,6 @@ void setup() {
   }  // End all the Bling Bling  
 
 }  // END SETUP 
-
-
 
 void loop() {  // MAIN LOOP START
 

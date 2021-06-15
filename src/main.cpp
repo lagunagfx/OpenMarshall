@@ -107,7 +107,6 @@ void midiOut(uint8_t midiCommand, uint8_t midiChannel, uint8_t midiData2, uint8_
 }
 
 void startupLEDsequence() {
-
   /*
     Startup LED test sequence (Bling Bling)
     just for visual pimpin' and debugging

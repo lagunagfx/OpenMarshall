@@ -13,6 +13,7 @@
 
   ChangeLog:
 
+  2021-06-15 | Tidying up things: the startup sequence is now a separated function
   2021-06-14 | Rescued from the vault! Migrated to PlatformIO's standard C++
   2011-08-04 | Foot Switchs 3 and 4 seems to need debouncing  
   2011-08-03 | First sketch using a protoboard.
@@ -105,6 +106,36 @@ void midiOut(uint8_t midiCommand, uint8_t midiChannel, uint8_t midiData2, uint8_
   Serial.write(midiMsg.raw, sizeof(midiMsg));
 }
 
+void startupLEDsequence() {
+
+  /*
+    Startup LED test sequence (Bling Bling)
+    just for visual pimpin' and debugging
+  */
+
+  // Blink all LEDs four times ...
+  for (int f=0;f<4;f++) {
+    // At the first cycle, blink the LEDs one at a time
+    if ( f == 0 ) {
+      for (int g=0;g<4;g++) {
+        digitalWrite(ledPin[g], HIGH);      
+        delay(400);
+        digitalWrite(ledPin[g], LOW);      
+      }
+      delay(300); 
+    }
+    // ... then blink all at once, 3 times
+    else {
+      for (int g=0;g<4;g++)
+        digitalWrite(ledPin[g], HIGH);      
+      delay(300);
+      for (int g=0;g<4;g++)
+        digitalWrite(ledPin[g], LOW);  
+      delay(200);
+    }    
+  }  
+}
+
 void setup() {
   // set the push buttons input pins
   for (int f=0;f<HowManyButtons;f++)
@@ -116,35 +147,10 @@ void setup() {
   // Set MIDI baud rate:
   //Serial.begin(31250);
   Serial.begin(115200); // highiest baud rate suitable for serial over USB
+  startupLEDsequence();
+} 
 
-  // Startup LED test sequence
-  // just for debugging and visual pimpin'
-  //
-  // Blink all LEDs four times
-  for (int f=0;f<4;f++) {
-    // At first, blink the LEDs one at a time
-    if ( f == 0 ) {
-      for (int g=0;g<4;g++) {
-        digitalWrite(ledPin[g], HIGH);      
-        delay(400);
-        digitalWrite(ledPin[g], LOW);      
-      }
-      delay(300); 
-    }
-    // Then blink all at once, 3 times
-    else {
-      for (int g=0;g<4;g++)
-        digitalWrite(ledPin[g], HIGH);      
-      delay(300);
-      for (int g=0;g<4;g++)
-        digitalWrite(ledPin[g], LOW);  
-      delay(200);
-    }    
-  }  // End all the Bling Bling  
-
-}  // END SETUP 
-
-void loop() {  // MAIN LOOP START
+void loop() {
 
   for (int f=0;f<HowManyButtons;f++) {
     // check button state
@@ -228,4 +234,4 @@ void loop() {  // MAIN LOOP START
     debounced = false;    
   }
   
-}  // MAIN LOOP ENDS
+}
